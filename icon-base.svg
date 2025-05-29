@@ -1,0 +1,53 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Définitions des dégradés et filtres -->
+  <defs>
+    <!-- Dégradé de fond principal -->
+    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F2A021;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#EBCC00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2EAB9B;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Dégradé pour les lettres -->
+    <linearGradient id="letterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F5F5F5;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Ombre pour le texte -->
+    <filter id="textShadow">
+      <feDropShadow dx="3" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+    
+    <!-- Ombre pour l'icône principale -->
+    <filter id="iconShadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Fond principal avec coins arrondis -->
+  <rect width="512" height="512" rx="64" ry="64" fill="url(#backgroundGradient)" filter="url(#iconShadow)"/>
+  
+  <!-- Cercles décoratifs en arrière-plan -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+  <circle cx="256" cy="256" r="160" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="4"/>
+  
+  <!-- Lettres "SA" principales -->
+  <text x="256" y="320" 
+        font-family="Arial, sans-serif" 
+        font-size="200" 
+        font-weight="bold" 
+        text-anchor="middle" 
+        fill="url(#letterGradient)"
+        filter="url(#textShadow)">SA</text>
+  
+  <!-- Élément décoratif en haut -->
+  <circle cx="256" cy="120" r="16" fill="rgba(255,255,255,0.8)"/>
+  <rect x="246" y="110" width="20" height="4" rx="2" fill="rgba(255,255,255,0.6)"/>
+  <rect x="246" y="118" width="20" height="4" rx="2" fill="rgba(255,255,255,0.6)"/>
+  <rect x="246" y="126" width="20" height="4" rx="2" fill="rgba(255,255,255,0.6)"/>
+  
+  <!-- Accent décoratif en bas -->
+  <rect x="190" y="420" width="132" height="8" rx="4" fill="rgba(255,255,255,0.4)"/>
+  <rect x="210" y="440" width="92" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+</svg>

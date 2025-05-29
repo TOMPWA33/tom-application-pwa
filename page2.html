@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2 - Simple App Demo</title>
+    
+    <!-- PWA Meta -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#F2A021">
+    
+    <!-- Icônes -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="window">
+        <!-- Bande droite colorée -->
+        <div class="bande-droite"></div>
+        
+        <!-- Logo application -->
+        <div class="app-logo">SA</div>
+        
+        <!-- En-tête -->
+        <div class="header">
+            <div class="title" data-trad="page2_title">Page 2</div>
+            <div class="subtitle" data-trad="page2_subtitle">Données et fonctionnalités avancées</div>
+        </div>
+        
+        <!-- Zone de contenu principal -->
+        <div class="content-wrapper">
+            <div class="main-content">
+                <div class="content-section">
+                    <h2 data-trad="page2_welcome">Bienvenue sur la Page 2</h2>
+                    <p data-trad="page2_description">Cette page démontre la navigation multi-pages et la persistance des données dans une PWA.</p>
+                    
+                    <!-- Statistiques simulées -->
+                    <div class="stats-section">
+                        <h3 data-trad="app_statistics">Statistiques de l'application</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">👥</div>
+                                <div class="stat-value" id="users-stat">0</div>
+                                <div class="stat-label" data-trad="active_users">Utilisateurs actifs</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📊</div>
+                                <div class="stat-value" id="sessions-stat">0</div>
+                                <div class="stat-label" data-trad="sessions_today">Sessions aujourd'hui</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">📈</div>
+                                <div class="stat-value" id="pageviews-stat">0</div>
+                                <div class="stat-label" data-trad="page_views">Pages vues</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">⭐</div>
+                                <div class="stat-value" id="rating-stat">4.8</div>
+                                <div class="stat-label" data-trad="user_rating">Note utilisateurs</div>
+                            </div>
+                        </div>
+                        <button id="refresh-stats-btn" class="btn btn-blue" data-trad="refresh_data">Actualiser les données</button>
+                    </div>
+                    
+                    <!-- Formulaire utilisateur -->
+                    <div class="user-form-section">
+                        <h3 data-trad="user_preferences">Préférences utilisateur</h3>
+                        <form id="user-form" class="user-form">
+                            <div class="form-group">
+                                <label for="user-name" data-trad="user_name">Nom d'utilisateur :</label>
+                                <input type="text" id="user-name" class="form-input" placeholder="Saisissez votre nom...">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="user-theme" data-trad="preferred_theme">Thème préféré :</label>
+                                <select id="user-theme" class="custom-select">
+                                    <option value="auto" data-trad="theme_auto">Automatique</option>
+                                    <option value="light" data-trad="theme_light">Clair</option>
+                                    <option value="dark" data-trad="theme_dark">Sombre</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="notifications" data-trad="notifications">Notifications :</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="email-notif" checked>
+                                        <span data-trad="email_notifications">Notifications par email</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="push-notif">
+                                        <span data-trad="push_notifications">Notifications push</span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-green" data-trad="save_preferences">Sauvegarder</button>
+                                <button type="reset" class="btn btn-orange" data-trad="reset_form">Réinitialiser</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Section d'activité -->
+                    <div class="activity-section">
+                        <h3 data-trad="recent_activity">Activité récente</h3>
+                        <div id="activity-log" class="activity-log">
+                            <div class="activity-item">
+                                <div class="activity-time">Il y a 2 min</div>
+                                <div class="activity-desc" data-trad="activity_page_visited">Page visitée : Accueil</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-time">Il y a 5 min</div>
+                                <div class="activity-desc" data-trad="activity_menu_selected">Menu sélectionné : Paramètres</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-time">Il y a 8 min</div>
+                                <div class="activity-desc" data-trad="activity_app_launched">Application lancée</div>
+                            </div>
+                        </div>
+                        <button id="clear-activity-btn" class="btn btn-secondary" data-trad="clear_activity">Effacer l'historique</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer avec navigation -->
+        <div class="footer">
+            <div class="footer-buttons">
+                <button id="back-home-btn" class="btn btn-blue" data-trad="back_to_home">← Retour Accueil</button>
+                <button id="test-popup-btn" class="btn btn-orange" data-trad="test_features">Tester fonctions</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Popup de confirmation -->
+    <div id="confirm-overlay" class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-header">
+                <div class="popup-title" data-trad="confirmation">Confirmation</div>
+                <button id="confirm-close" class="close-btn">&times;</button>
+            </div>
+            <div class="popup-content">
+                <div class="popup-message">
+                    <p id="confirm-message" data-trad="confirm_action">Êtes-vous sûr de vouloir effectuer cette action ?</p>
+                </div>
+            </div>
+            <div class="popup-footer">
+                <button id="confirm-yes" class="btn btn-green" data-trad="yes">Oui</button>
+                <button id="confirm-no" class="btn btn-red" data-trad="no">Non</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Styles spécifiques à la page 2 -->
+    <style>
+        .stats-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: var(--radius-element);
+            box-shadow: var(--shadow-card);
+        }
+        
+        .stats-section h3 {
+            color: var(--blue);
+            margin-bottom: 20px;
+            font-size: var(--font-size-subtitle);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background-color: var(--input-gray);
+            padding: 15px;
+            border-radius: var(--radius-element);
+            text-align: center;
+            border: 1px solid var(--border-gray);
+        }
+        
+        .stat-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--teal);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .user-form-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: var(--radius-element);
+            box-shadow: var(--shadow-card);
+        }
+        
+        .user-form-section h3 {
+            color: var(--orange);
+            margin-bottom: 20px;
+            font-size: var(--font-size-subtitle);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-gray);
+            border-radius: var(--radius-element);
+            background-color: var(--input-gray);
+            color: var(--text-dark);
+            font-size: var(--font-size-content);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--teal);
+            box-shadow: 0 0 0 2px rgba(46, 171, 155, 0.2);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: normal;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .activity-section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--white);
+            border-radius: var(--radius-element);
+            box-shadow: var(--shadow-card);
+        }
+        
+        .activity-section h3 {
+            color: var(--red);
+            margin-bottom: 20px;
+            font-size: var(--font-size-subtitle);
+        }
+        
+        .activity-log {
+            margin-bottom: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .activity-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-time {
+            color: var(--text-secondary);
+            font-size: 12px;
+            min-width: 80px;
+        }
+        
+        .activity-desc {
+            color: var(--text-dark);
+            flex: 1;
+            margin-left: 15px;
+        }
+        
+        .btn-red {
+            background-color: var(--red);
+            color: var(--text-light);
+        }
+        
+        .btn-secondary {
+            background-color: var(--neutral-gray);
+            color: var(--text-light);
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .activity-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .activity-desc {
+                margin-left: 0;
+            }
+        }
+    </style>
+    
+    <!-- Script spécifique à la page 2 -->
+    <script>
+        // Page2 App Class
+        class Page2App {
+            constructor() {
+                this.db = null;
+                this.confirmCallback = null;
+                this.init();
+            }
+            
+            async init() {
+                console.log('🚀 Initialisation Page 2');
+                
+                // Initialiser IndexedDB
+                await this.initDB();
+                
+                // Charger préférences sauvegardées
+                await this.loadUserPreferences();
+                
+                // Configurer événements
+                this.setupEventListeners();
+                
+                // Démarrer animation stats
+                this.animateStats();
+                
+                // Ajouter activité de visite
+                this.addActivity('Page visitée : Page 2');
+                
+                console.log('✅ Page 2 initialisée');
+            }
+            
+            async initDB() {
+                return new Promise((resolve) => {
+                    const request = indexedDB.open('SimpleAppDB', 1);
+                    request.onsuccess = (event) => {
+                        this.db = event.target.result;
+                        resolve();
+                    };
+                    request.onerror = () => resolve();
+                });
+            }
+            
+            setupEventListeners() {
+                // Navigation
+                document.getElementById('back-home-btn')?.addEventListener('click', () => {
+                    this.addActivity('Navigation : Retour accueil');
+                    window.location.href = 'index.html';
+                });
+                
+                // Actualiser stats
+                document.getElementById('refresh-stats-btn')?.addEventListener('click', () => {
+                    this.refreshStats();
+                });
+                
+                // Test popup
+                document.getElementById('test-popup-btn')?.addEventListener('click', () => {
+                    this.showTestPopup();
+                });
+                
+                // Formulaire
+                document.getElementById('user-form')?.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveUserPreferences();
+                });
+                
+                // Effacer activité
+                document.getElementById('clear-activity-btn')?.addEventListener('click', () => {
+                    this.confirmAction('Voulez-vous effacer tout l\'historique d\'activité ?', () => {
+                        this.clearActivity();
+                    });
+                });
+                
+                // Popup confirmation
+                this.setupConfirmPopup();
+            }
+            
+            setupConfirmPopup() {
+                const overlay = document.getElementById('confirm-overlay');
+                const closeBtn = document.getElementById('confirm-close');
+                const yesBtn = document.getElementById('confirm-yes');
+                const noBtn = document.getElementById('confirm-no');
+                
+                closeBtn?.addEventListener('click', () => this.hideConfirmPopup());
+                noBtn?.addEventListener('click', () => this.hideConfirmPopup());
+                yesBtn?.addEventListener('click', () => {
+                    if (this.confirmCallback) {
+                        this.confirmCallback();
+                        this.confirmCallback = null;
+                    }
+                    this.hideConfirmPopup();
+                });
+                
+                overlay?.addEventListener('click', (e) => {
+                    if (e.target === overlay) this.hideConfirmPopup();
+                });
+            }
+            
+            animateStats() {
+                const stats = [
+                    { id: 'users-stat', target: 1247, duration: 2000 },
+                    { id: 'sessions-stat', target: 89, duration: 1500 },
+                    { id: 'pageviews-stat', target: 3428, duration: 2500 }
+                ];
+                
+                stats.forEach(stat => {
+                    this.animateNumber(stat.id, 0, stat.target, stat.duration);
+                });
+            }
+            
+            animateNumber(elementId, start, end, duration) {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+                
+                const startTime = Date.now();
+                const update = () => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const current = Math.floor(start + (end - start) * progress);
+                    
+                    element.textContent = current.toLocaleString();
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    }
+                };
+                update();
+            }
+            
+            refreshStats() {
+                this.addActivity('Action : Actualisation des données');
+                this.animateStats();
+                
+                // Simuler un délai de chargement
+                const btn = document.getElementById('refresh-stats-btn');
+                if (btn) {
+                    btn.disabled = true;
+                    btn.textContent = 'Actualisation...';
+                    setTimeout(() => {
+                        btn.disabled = false;
+                        btn.textContent = 'Actualiser les données';
+                    }, 1500);
+                }
+            }
+            
+            showTestPopup() {
+                this.confirmAction('Ceci est un test des fonctionnalités popup. Tout fonctionne correctement !', () => {
+                    this.addActivity('Test : Popup de fonctionnalités');
+                });
+            }
+            
+            async saveUserPreferences() {
+                const formData = {
+                    name: document.getElementById('user-name')?.value || '',
+                    theme: document.getElementById('user-theme')?.value || 'auto',
+                    emailNotif: document.getElementById('email-notif')?.checked || false,
+                    pushNotif: document.getElementById('push-notif')?.checked || false,
+                    timestamp: Date.now()
+                };
+                
+                await this.saveToDB('userPreferences', formData);
+                this.addActivity(`Préférences : ${formData.name || 'Anonyme'} - ${formData.theme}`);
+                
+                // Feedback visuel
+                const btn = document.querySelector('button[type="submit"]');
+                if (btn) {
+                    const originalText = btn.textContent;
+                    btn.textContent = '✅ Sauvegardé !';
+                    btn.disabled = true;
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.disabled = false;
+                    }, 2000);
+                }
+            }
+            
+            async loadUserPreferences() {
+                const prefs = await this.loadFromDB('userPreferences');
+                if (prefs) {
+                    document.getElementById('user-name').value = prefs.name || '';
+                    document.getElementById('user-theme').value = prefs.theme || 'auto';
+                    document.getElementById('email-notif').checked = prefs.emailNotif || false;
+                    document.getElementById('push-notif').checked = prefs.pushNotif || false;
+                }
+            }
+            
+            addActivity(description) {
+                const log = document.getElementById('activity-log');
+                if (!log) return;
+                
+                const item = document.createElement('div');
+                item.className = 'activity-item';
+                item.innerHTML = `
+                    <div class="activity-time">À l'instant</div>
+                    <div class="activity-desc">${description}</div>
+                `;
+                
+                log.insertBefore(item, log.firstChild);
+                
+                // Limiter à 10 éléments
+                while (log.children.length > 10) {
+                    log.removeChild(log.lastChild);
+                }
+            }
+            
+            clearActivity() {
+                const log = document.getElementById('activity-log');
+                if (log) {
+                    log.innerHTML = '<div class="activity-item"><div class="activity-time">--</div><div class="activity-desc">Historique effacé</div></div>';
+                }
+            }
+            
+            confirmAction(message, callback) {
+                const messageEl = document.getElementById('confirm-message');
+                if (messageEl) {
+                    messageEl.textContent = message;
+                }
+                
+                this.confirmCallback = callback;
+                this.showConfirmPopup();
+            }
+            
+            showConfirmPopup() {
+                const overlay = document.getElementById('confirm-overlay');
+                if (overlay) {
+                    overlay.classList.add('active');
+                }
+            }
+            
+            hideConfirmPopup() {
+                const overlay = document.getElementById('confirm-overlay');
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
+            }
+            
+            async saveToDB(key, value) {
+                if (!this.db) return false;
+                try {
+                    const transaction = this.db.transaction(['preferences'], 'readwrite');
+                    const store = transaction.objectStore('preferences');
+                    await store.put({ key, value, timestamp: Date.now() });
+                    return true;
+                } catch (error) {
+                    console.error('❌ Erreur sauvegarde:', error);
+                    return false;
+                }
+            }
+            
+            async loadFromDB(key) {
+                if (!this.db) return null;
+                try {
+                    const transaction = this.db.transaction(['preferences'], 'readonly');
+                    const store = transaction.objectStore('preferences');
+                    const request = store.get(key);
+                    
+                    return new Promise((resolve) => {
+                        request.onsuccess = () => {
+                            const result = request.result;
+                            resolve(result ? result.value : null);
+                        };
+                        request.onerror = () => resolve(null);
+                    });
+                } catch (error) {
+                    return null;
+                }
+            }
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            window.page2App = new Page2App();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'icônes PWA - Simple App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #F2A021;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .preview-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .icon-preview {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        
+        .icon-preview img {
+            border-radius: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .icon-size {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .download-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .download-btn {
+            background-color: #2EAB9B;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .download-btn:hover {
+            background-color: #259085;
+        }
+        
+        .download-all-btn {
+            background-color: #F2A021;
+            color: #222;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .download-all-btn:hover {
+            background-color: #e8941d;
+        }
+        
+        .instructions {
+            background-color: #e8f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2EAB9B;
+            margin: 20px 0;
+        }
+        
+        .instructions h3 {
+            color: #2EAB9B;
+            margin-top: 0;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        
+        .manifest-info {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #F2A021;
+            margin: 20px 0;
+        }
+        
+        .code-block {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+            margin: 10px 0;
+            border: 1px solid #e9ecef;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Générateur d'icônes PWA</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            Génération automatique de toutes les tailles d'icônes nécessaires pour Simple App PWA
+        </p>
+        
+        <!-- Section aperçu -->
+        <div class="preview-section">
+            <h3>Aperçu des icônes générées</h3>
+            <div class="grid" id="iconsGrid">
+                <!-- Les icônes seront générées ici -->
+            </div>
+        </div>
+        
+        <!-- Section téléchargement -->
+        <div class="download-section">
+            <h3>📥 Télécharger les icônes</h3>
+            <p>Cliquez sur les boutons ci-dessous pour télécharger chaque taille d'icône :</p>
+            <div id="downloadButtons">
+                <!-- Les boutons seront générés ici -->
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="download-all-btn" onclick="downloadAllIcons()">
+                    📦 Télécharger toutes les icônes
+                </button>
+            </div>
+        </div>
+        
+        <!-- Instructions d'installation -->
+        <div class="instructions">
+            <h3>📋 Instructions d'installation</h3>
+            <ol>
+                <li><strong>Téléchargez toutes les icônes</strong> en cliquant sur le bouton "Télécharger toutes les icônes"</li>
+                <li><strong>Créez un dossier "icons"</strong> à la racine de votre projet PWA</li>
+                <li><strong>Placez tous les fichiers PNG</strong> dans le dossier "icons/"</li>
+                <li><strong>Vérifiez</strong> que les noms des fichiers correspondent à ceux du manifest.json</li>
+                <li><strong>Testez</strong> votre PWA sur différents appareils pour vérifier les icônes</li>
+            </ol>
+        </div>
+        
+        <!-- Informations sur le manifeste -->
+        <div class="manifest-info">
+            <h3>⚙️ Configuration du manifest.json</h3>
+            <p>Votre fichier <code>manifest.json</code> est déjà configuré avec les bonnes références :</p>
+            <div class="code-block">
+"icons": [
+  { "src": "./icons/icon-72x72.png", "sizes": "72x72", "type": "image/png" },
+  { "src": "./icons/icon-96x96.png", "sizes": "96x96", "type": "image/png" },
+  { "src": "./icons/icon-128x128.png", "sizes": "128x128", "type": "image/png" },
+  { "src": "./icons/icon-144x144.png", "sizes": "144x144", "type": "image/png" },
+  { "src": "./icons/icon-152x152.png", "sizes": "152x152", "type": "image/png" },
+  { "src": "./icons/icon-192x192.png", "sizes": "192x192", "type": "image/png" },
+  { "src": "./icons/icon-384x384.png", "sizes": "384x384", "type": "image/png" },
+  { "src": "./icons/icon-512x512.png", "sizes": "512x512", "type": "image/png" }
+]
+            </div>
+        </div>
+        
+        <!-- Zone de debug -->
+        <div style="margin-top: 30px; padding: 15px; background-color: #f8f9fa; border-radius: 8px;">
+            <h4>🔍 Informations de génération</h4>
+            <div id="debugInfo"></div>
+        </div>
+    </div>
+
+    <script>
+        // Tailles d'icônes requises pour PWA
+        const ICON_SIZES = [72, 96, 128, 144, 152, 192, 384, 512];
+        
+        // SVG de base pour génération
+        const BASE_SVG = `<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <defs>
+            <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#F2A021;stop-opacity:1" />
+              <stop offset="50%" style="stop-color:#EBCC00;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#2EAB9B;stop-opacity:1" />
+            </linearGradient>
+            <linearGradient id="letterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#F5F5F5;stop-opacity:1" />
+            </linearGradient>
+            <filter id="textShadow">
+              <feDropShadow dx="3" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
+            </filter>
+            <filter id="iconShadow">
+              <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.3"/>
+            </filter>
+          </defs>
+          <rect width="512" height="512" rx="64" ry="64" fill="url(#backgroundGradient)" filter="url(#iconShadow)"/>
+          <circle cx="256" cy="256" r="200" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+          <circle cx="256" cy="256" r="160" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="4"/>
+          <text x="256" y="320" font-family="Arial, sans-serif" font-size="200" font-weight="bold" text-anchor="middle" fill="url(#letterGradient)" filter="url(#textShadow)">SA</text>
+          <circle cx="256" cy="120" r="16" fill="rgba(255,255,255,0.8)"/>
+          <rect x="246" y="110" width="20" height="4" rx="2" fill="rgba(255,255,255,0.6)"/>
+          <rect x="246" y="118" width="20" height="4" rx="2" fill="rgba(255,255,255,0.6)"/>
+          <rect x="246" y="126" width="20" height="4" rx="2" fill="rgba(255,255,255,0.6)"/>
+          <rect x="190" y="420" width="132" height="8" rx="4" fill="rgba(255,255,255,0.4)"/>
+          <rect x="210" y="440" width="92" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+        </svg>`;
+        
+        let generatedIcons = {};
+        
+        // Génération des icônes au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎨 Démarrage génération icônes');
+            generateAllIcons();
+            updateDebugInfo();
+        });
+        
+        function generateAllIcons() {
+            const iconsGrid = document.getElementById('iconsGrid');
+            const downloadButtons = document.getElementById('downloadButtons');
+            
+            ICON_SIZES.forEach(async (size) => {
+                try {
+                    // Générer l'icône
+                    const iconData = await generateIcon(size);
+                    generatedIcons[size] = iconData;
+                    
+                    // Créer l'aperçu
+                    const preview = createIconPreview(size, iconData);
+                    iconsGrid.appendChild(preview);
+                    
+                    // Créer le bouton de téléchargement
+                    const downloadBtn = createDownloadButton(size, iconData);
+                    downloadButtons.appendChild(downloadBtn);
+                    
+                    console.log(`✅ Icône ${size}x${size} générée`);
+                } catch (error) {
+                    console.error(`❌ Erreur génération ${size}x${size}:`, error);
+                }
+            });
+            
+            console.log('🎉 Génération terminée');
+        }
+        
+        function generateIcon(size) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = size;
+                canvas.height = size;
+                
+                const img = new Image();
+                const svgBlob = new Blob([BASE_SVG], { type: 'image/svg+xml' });
+                const url = URL.createObjectURL(svgBlob);
+                
+                img.onload = function() {
+                    ctx.drawImage(img, 0, 0, size, size);
+                    const dataUrl = canvas.toDataURL('image/png');
+                    URL.revokeObjectURL(url);
+                    resolve(dataUrl);
+                };
+                
+                img.onerror = function() {
+                    console.error(`Erreur chargement image ${size}x${size}`);
+                    resolve(null);
+                };
+                
+                img.src = url;
+            });
+        }
+        
+        function createIconPreview(size, iconData) {
+            const preview = document.createElement('div');
+            preview.className = 'icon-preview';
+            
+            const img = document.createElement('img');
+            img.width = Math.min(size, 96);
+            img.height = Math.min(size, 96);
+            img.alt = `Icône ${size}x${size}`;
+            img.src = iconData;
+            
+            const label = document.createElement('div');
+            label.className = 'icon-size';
+            label.textContent = `${size}×${size}`;
+            
+            preview.appendChild(img);
+            preview.appendChild(label);
+            
+            return preview;
+        }
+        
+        function createDownloadButton(size, iconData) {
+            const button = document.createElement('button');
+            button.className = 'download-btn';
+            button.textContent = `${size}×${size}`;
+            button.onclick = () => downloadIcon(size, iconData);
+            return button;
+        }
+        
+        function downloadIcon(size, iconData) {
+            if (!iconData) {
+                alert(`Erreur: Icône ${size}x${size} non générée`);
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = `icon-${size}x${size}.png`;
+            link.href = iconData;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            console.log(`📥 Téléchargé: icon-${size}x${size}.png`);
+        }
+        
+        async function downloadAllIcons() {
+            console.log('📦 Téléchargement de toutes les icônes...');
+            
+            let downloaded = 0;
+            const total = ICON_SIZES.length;
+            
+            for (const size of ICON_SIZES) {
+                if (generatedIcons[size]) {
+                    downloadIcon(size, generatedIcons[size]);
+                    downloaded++;
+                    
+                    // Délai pour éviter la surcharge
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                }
+            }
+            
+            if (downloaded === total) {
+                alert(`✅ ${downloaded} icônes téléchargées avec succès !`);
+            } else {
+                alert(`⚠️ ${downloaded}/${total} icônes téléchargées`);
+            }
+            
+            console.log(`🎉 Téléchargement terminé: ${downloaded}/${total}`);
+        }
+        
+        function updateDebugInfo() {
+            const debugInfo = document.getElementById('debugInfo');
+            debugInfo.innerHTML = `
+                <p><strong>Nombre d'icônes:</strong> ${ICON_SIZES.length}</p>
+                <p><strong>Tailles:</strong> ${ICON_SIZES.join(', ')} pixels</p>
+                <p><strong>Format:</strong> PNG haute résolution</p>
+                <p><strong>Compatibilité:</strong> iOS, Android, Windows, Web</p>
+                <p><strong>Statut:</strong> <span id="generationStatus" style="color: #F2A021;">⏳ Génération en cours...</span></p>
+            `;
+            
+            setTimeout(() => {
+                const status = document.getElementById('generationStatus');
+                if (status) {
+                    status.innerHTML = '<span style="color: #2EAB9B;">✅ Prêt pour téléchargement</span>';
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

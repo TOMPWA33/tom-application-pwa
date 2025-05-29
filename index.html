@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple App Demo</title>
+    
+    <!-- PWA Meta -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#F2A021">
+    
+    <!-- Icônes -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="window">
+        <!-- Bande droite colorée inspirée de TOM -->
+        <div class="bande-droite"></div>
+        
+        <!-- Logo application -->
+        <div class="app-logo">SA</div>
+        
+        <!-- En-tête avec titre et sous-titre -->
+        <div class="header">
+            <div class="title" data-trad="app_title">Simple App</div>
+            <div class="subtitle" data-trad="app_subtitle">Application de démonstration PWA</div>
+        </div>
+        
+        <!-- Zone de contenu principal -->
+        <div class="content-wrapper">
+            <div class="main-content">
+                <div class="content-section">
+                    <h2 data-trad="welcome_title">Bienvenue dans Simple App</h2>
+                    <p data-trad="welcome_description">Cette application démontre les fonctionnalités de base d'une PWA inspirée de TOM.</p>
+                    
+                    <!-- Menu déroulant -->
+                    <div class="dropdown-section">
+                        <label for="options-menu" data-trad="choose_option">Choisissez une option :</label>
+                        <select id="options-menu" class="custom-select">
+                            <option value="" data-trad="select_placeholder">-- Sélectionnez --</option>
+                            <option value="data" data-trad="option_data">Gestion des données</option>
+                            <option value="settings" data-trad="option_settings">Paramètres</option>
+                            <option value="help" data-trad="option_help">Aide et support</option>
+                            <option value="about" data-trad="option_about">À propos</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Section PWA Info -->
+                    <div class="pwa-info-section">
+                        <h3 data-trad="pwa_status">Statut PWA</h3>
+                        <div class="status-grid">
+                            <div class="status-item">
+                                <span class="status-label" data-trad="install_status">Installation :</span>
+                                <span id="install-status" class="status-value">Web App</span>
+                            </div>
+                            <div class="status-item">
+                                <span class="status-label" data-trad="connection_status">Connexion :</span>
+                                <span id="connection-status" class="status-value">En ligne</span>
+                            </div>
+                        </div>
+                        <button id="install-btn" class="btn btn-install" style="display: none;" data-trad="install_app">Installer l'App</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer avec boutons -->
+        <div class="footer">
+            <div class="footer-buttons">
+                <button id="popup-btn" class="btn btn-orange" data-trad="show_popup">Afficher Popup</button>
+                <button id="page2-btn" class="btn btn-blue" data-trad="go_page2">Aller Page 2</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Popup modal -->
+    <div id="popup-overlay" class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-header">
+                <div class="popup-title" data-trad="popup_title">Information</div>
+                <button id="popup-close" class="close-btn">&times;</button>
+            </div>
+            <div class="popup-content">
+                <div class="popup-message">
+                    <p data-trad="popup_message">Ceci est un popup de démonstration !</p>
+                    <p data-trad="popup_description">Vous pouvez afficher ici différentes informations selon le contexte choisi dans le menu.</p>
+                    <div id="popup-dynamic-content"></div>
+                </div>
+            </div>
+            <div class="popup-footer">
+                <button id="popup-ok" class="btn btn-green" data-trad="popup_ok">Valider</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
